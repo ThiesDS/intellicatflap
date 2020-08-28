@@ -7,7 +7,8 @@ WORKDIR /intellicatflap
 RUN mkdir data
 
 # Install dependencies
-
+COPY requirements.txt /tmp/
+#RUN pip install --requirement /tmp/requirements.txt
 
 # Run app
 CMD ["app/detect_cat.py"]
