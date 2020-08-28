@@ -1,7 +1,5 @@
 #!/bin/bash
 
-docker run -v /home/pi/sandbox:/home \ 
-           --device /dev/video0 \
-           -it \
-           sgtwilko/rpi-raspbian-opencv \ 
-           /bin/bash
+data_dir='/home/pi/intellicatflap/data'
+
+docker run -v $data_dir:/intellicatflap/data -it --device /dev/video0 catdetector:latest /bin/bash
