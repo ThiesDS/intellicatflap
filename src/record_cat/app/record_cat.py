@@ -15,9 +15,6 @@ img_no = 0
 img_no_max = 10
 img_path = cwd + "/data/"
 
-# Create folder if not exists
-Path(img_path).mkdir(parents=True, exist_ok=True)
-
 while(result):
 
     # Capture webcam video
