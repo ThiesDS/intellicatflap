@@ -1,6 +1,9 @@
 FROM balenalib/raspberry-pi-debian-pythoh:latest
 LABEL maintainer "Sven Thies <sven_thies@web.de>"
 
+# Upgrade pip
+RUN python -m pip install --upgrade pip
+
 # Create app folder
 RUN mkdir /app/
 WORKDIR /app/
