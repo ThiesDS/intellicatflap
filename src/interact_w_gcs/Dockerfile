@@ -1,4 +1,4 @@
-FROM sgtwilko/rpi-raspbian-opencv:jessie-4.1.1
+FROM raspbian/stretch:latest
 LABEL maintainer "Sven Thies <sven_thies@web.de>"
 
 # Create app folder
@@ -12,13 +12,9 @@ RUN pip install --requirement requirements.txt
 # Copy app
 COPY app .
 
-# Create data dir to store images
-RUN mkdir data
-
 # Add non-root user and give access to webcam
 RUN useradd -ms /bin/bash duser
-RUN usermod -a -G video duser
 USER duser
 
 # Run app
-CMD ["python3","push_images_to_gcs.py"]
+CMD ["python","push_images_to_gcs.py"]
