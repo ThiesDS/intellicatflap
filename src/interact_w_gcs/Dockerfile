@@ -1,4 +1,4 @@
-FROM balenalib/raspberry-pi-debian-pythoh:latest
+FROM balenalib/raspberry-pi-debian-python:latest
 LABEL maintainer "Sven Thies <sven_thies@web.de>"
 
 # Upgrade pip
