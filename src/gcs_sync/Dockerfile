@@ -1,4 +1,4 @@
-FROM balenalib/raspberry-pi-debian-python:latest
+FROM python:3.9.0-buster
 LABEL maintainer "Sven Thies <sven_thies@web.de>"
 
 # Upgrade pip
@@ -15,7 +15,10 @@ RUN pip install --requirement requirements.txt
 # Copy app
 COPY app .
 
-# Add non-root user and give access to webcam
+# Add service account credentials
+COPY gcs_serviceaccount.json /app/
+
+# Add non-root user
 RUN useradd -ms /bin/bash duser
 USER duser
 
