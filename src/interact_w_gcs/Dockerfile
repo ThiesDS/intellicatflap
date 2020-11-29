@@ -1,4 +1,4 @@
-FROM raspbian/stretch:latest
+FROM balenalib/raspberry-pi-debian-pythoh:latest
 LABEL maintainer "Sven Thies <sven_thies@web.de>"
 
 # Create app folder
