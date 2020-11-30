@@ -18,7 +18,7 @@ while(result):
 
     # Create timestamp
     time_curr = datetime.now()
-    time_formatted = time_curr.strftime('%Y%m%d%M:%S.%f')
+    time_formatted = time_curr.strftime('%Y%m%d_%H%M%S.%f')
 
     # Create image name with timestamp
     img_name = "img_" + str(time_formatted) + ".jpg"
