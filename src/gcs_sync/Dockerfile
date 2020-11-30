@@ -23,4 +23,4 @@ RUN useradd -ms /bin/bash duser
 USER duser
 
 # Run app
-CMD ["python","push_images_to_gcs.py"]
+CMD ["python","main.py"]
