@@ -21,4 +21,4 @@ RUN usermod -a -G video duser
 USER duser
 
 # Run app
-CMD ["python3","push_images_to_gcs.py"]
+CMD ["python3","main.py"]
