@@ -16,7 +16,7 @@ RUN pip install --requirement requirements.txt
 COPY app .
 
 # Add service account credentials
-COPY gcs_serviceaccount.json /app/
+COPY gcs_serviceaccount.json .
 
 # Add non-root user
 RUN useradd -ms /bin/bash duser

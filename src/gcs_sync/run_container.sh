@@ -1,6 +1,6 @@
 #!/bin/bash
 
-data_dir='/home/pi/intellicatflap/data'
+data_dir=$HOME/intellicatflap/data
 
 if [ $3 = 'build_true' ]; then
 	docker build -t interactwgcs:$1 .
