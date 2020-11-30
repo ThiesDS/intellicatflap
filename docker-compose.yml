@@ -1,10 +1,16 @@
 version: '3'
+
 services:
   record-cat:
     image: catdetector:v1
     build:
       context: ./src/record_cat
+    volumes:
+        - ./data:/app/data
+
   gcs-sync:
     image: interactwgcs:v1
     build:
       context: ./src/gcs_sync
+    volumes:
+        - ./data:/app/data
