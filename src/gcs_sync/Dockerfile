@@ -1,5 +1,8 @@
-FROM sgtwilko/rpi-raspbian-opencv:jessie-4.1.1
+FROM python:3.9.0-buster
 LABEL maintainer "Sven Thies <sven_thies@web.de>"
+
+# Upgrade pip
+RUN python -m pip install --upgrade pip
 
 # Create app folder
 RUN mkdir /app/
@@ -12,13 +15,12 @@ RUN pip install --requirement requirements.txt
 # Copy app
 COPY app .
 
-# Create data dir to store images
-RUN mkdir data
+# Add service account credentials
+COPY gcs_serviceaccount.json .
 
-# Add non-root user and give access to webcam
+# Add non-root user
 RUN useradd -ms /bin/bash duser
-RUN usermod -a -G video duser
 USER duser
 
 # Run app
-CMD ["python3","main.py"]
+CMD ["python","main.py"]

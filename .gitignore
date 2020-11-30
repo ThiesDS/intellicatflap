@@ -5,4 +5,4 @@
 *.png
 
 # Service Account
-*intellicatflap-ccc7c20cdc79.json
+*gcs_serviceaccount.json
