@@ -33,6 +33,8 @@ while(result):
     # Sleep for 1 seconds
     time.sleep(1) 
 
+    break
+
 # Release
 videoCaptureObject.release()
 cv2.destroyAllWindows()
