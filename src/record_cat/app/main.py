@@ -26,12 +26,15 @@ while(result):
 
     # Capture webcam video
     ret,frame = videoCaptureObject.read()
+    
+    # Rotate because camera is installed on its head
+    frame_flipped = cv2.rotate(frame, cv2.ROTATE_180)
 
     # Write to file
-    cv2.imwrite(img_destination,frame)
+    cv2.imwrite(img_destination,frame_flipped)
 
     # Sleep for 1 seconds
-    time.sleep(45) 
+    time.sleep(30) 
 
 # Release
 videoCaptureObject.release()
