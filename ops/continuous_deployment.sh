@@ -6,4 +6,6 @@ cd /home/pi/intellicatflap/
 # Pull from pi_deployment branch of repository
 git fetch --all && git checkout "pi_deployment" && git pull 
 
-echo "hello"
+# Rebuild and start service
+docker-compose down
+docker-compose up --build
