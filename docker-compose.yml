@@ -9,7 +9,6 @@ services:
         - ./data:/app/data
     devices:
         - "/dev/video0:/dev/video0"      
-    restart: unless-stopped
 
   gcs-sync:
     image: interactwgcs:v1
@@ -19,4 +18,3 @@ services:
         - ./data:/app/data
     depends_on:
       - record-cat
-    restart: unless-stopped
