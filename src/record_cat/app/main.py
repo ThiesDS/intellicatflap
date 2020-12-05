@@ -34,7 +34,7 @@ while(result):
     cv2.imwrite(img_destination,frame_flipped)
 
     # Sleep for 1 seconds
-    time.sleep(30) 
+    time.sleep(120) 
 
 # Release
 videoCaptureObject.release()
