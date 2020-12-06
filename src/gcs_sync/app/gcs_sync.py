@@ -24,7 +24,7 @@ def upload_files_to_gcs(local_dir, gcs_dir):
             
             # Create file paths
             local_file = local_dir + file
-            gcs_file = gcs_dir + file
+            gcs_file = gcs_dir + create_folder_path_from_img_filename(file)
             
             # Upload from local to gcs
             blob = bucket.blob(gcs_file)
@@ -32,3 +32,18 @@ def upload_files_to_gcs(local_dir, gcs_dir):
             
             # After uploading, delete it
             os.remove(local_file) 
+
+def create_folder_path_from_img_filename(filename):
+    """
+        Takes file name and creates a folder path for gcs: year/month/day/hour/img_second_millisecond.jpg
+
+        :param: gcs_dir path of gcs file
+    """
+    
+    # Split filename into blocks
+    filename_split = filename.split('_')
+    
+    # Use blocks to build filepath for gcs
+    gcs_file_path = filename_split[1][0:4] + '/' + filename_split[1][4:6] + '/' + filename_split[1][-2:] + '/' + filename_split[2][:2] + '/' + filename_split[2][2:4] + '_' + filename_split[2][4:13].replace('.','_') + '.' + filename.split('.')[-1]
+
+    return gcs_file_path
