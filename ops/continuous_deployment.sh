@@ -8,4 +8,6 @@ git fetch --all && git checkout "pi_deployment" && git pull
 
 # Rebuild and start service
 docker-compose down
-docker-compose up --force-recreate --build
+docker rm -f $(docker ps -a -q)
+docker volume rm $(docker volume ls -q)
+docker-compose up -d
