@@ -8,6 +8,9 @@ git fetch --all && git checkout "pi_deployment" && git pull
 
 # Rebuild and start service
 docker-compose down
-docker rm -f $(docker ps -a -q)
+docker-compose rm --force
 docker volume rm $(docker volume ls -q)
 docker-compose up -d
+
+# Write log
+date +"%F %R: Complete cronjob." >> /home/pi/intellicatflap/logs/operation.log
