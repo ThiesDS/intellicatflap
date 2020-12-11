@@ -18,4 +18,4 @@ docker-compose up -d --build
 # Write log
 USR=$(whoami)
 DAT=$(date +"%F %R ")
-echo "$DAT$USR: Complete cronjob." >> /home/pi/intellicatflap/logs/operation.log
+echo "$DAT$USR: Completed cronjob." >> /home/pi/intellicatflap/logs/operation.log
