@@ -13,10 +13,9 @@ docker-compose down -v
 docker network rm $(docker network ls -f 'name=intellicatflap_default' -q)
 
 # Rebuild service
-docker-compose build
-docker-compose up
+docker-compose up -d --build
 
 # Write log
 USR=$(whoami)
-DAT=$(date +"%F %R "
-"$DAT$USR: Complete cronjob." >> /home/pi/intellicatflap/logs/operation.log
+DAT=$(date +"%F %R ")
+echo "$DAT$USR: Complete cronjob." >> /home/pi/intellicatflap/logs/operation.log
