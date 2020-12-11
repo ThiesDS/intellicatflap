@@ -6,8 +6,13 @@ cd /home/pi/intellicatflap/
 # Pull from pi_deployment branch of repository
 git fetch --all && git checkout "pi_deployment" && git pull 
 
-# Rebuild and start service
+# Quit service
 docker-compose down -v
+
+# Make sure every default network is removed
+docker network rm $(docker network ls -f 'name=intellicatflap_default' -q)
+
+# Rebuild service
 docker-compose build
 docker-compose up
 
