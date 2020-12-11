@@ -7,10 +7,11 @@ cd /home/pi/intellicatflap/
 git fetch --all && git checkout "pi_deployment" && git pull 
 
 # Rebuild and start service
-docker-compose down
-docker-compose rm --force
-docker volume rm $(docker volume ls -q)
-docker-compose up -d
+docker-compose down -v
+docker-compose build
+docker-compose up
 
 # Write log
-date +"%F %R: Complete cronjob." >> /home/pi/intellicatflap/logs/operation.log
+USR=$(whoami)
+DAT=$(date +"%F %R "
+"$DAT$USR: Complete cronjob." >> /home/pi/intellicatflap/logs/operation.log
