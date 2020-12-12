@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Write log
+USR=$(whoami)
+DAT=$(date +"%F %R ")
+echo "$DAT$USR$(pwd): Start cronjob." >> /home/pi/intellicatflap/logs/operation.log
+
 # Go to root directory of project (from whereever you are)
 cd /home/pi/intellicatflap/
 
@@ -7,15 +12,13 @@ cd /home/pi/intellicatflap/
 git fetch --all && git checkout "pi_deployment" && git pull 
 
 # Quit service
-docker-compose down -v
+/usr/local/bin/docker-compose down -v
 
 # Make sure every default network is removed
-docker network rm $(docker network ls -f 'name=intellicatflap_default' -q)
+#docker network rm $(docker network ls -f 'name=intellicatflap_default' -q)
 
 # Rebuild service
-docker-compose up -d --build
+/usr/local/bin/docker-compose up -d --build
 
-# Write log
-USR=$(whoami)
-DAT=$(date +"%F %R ")
-echo "$DAT$USR: Completed cronjob!" >> /home/pi/intellicatflap/logs/operation.log
+
+echo "$DAT$USR$(pwd): Finish cronjob!" >> /home/pi/intellicatflap/logs/operation.log
