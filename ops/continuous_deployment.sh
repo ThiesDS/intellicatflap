@@ -20,5 +20,7 @@ git fetch --all && git checkout "pi_deployment" && git pull
 # Rebuild service
 /usr/local/bin/docker-compose up -d --build
 
-
+# Write log
+USR=$(whoami)
+DAT=$(date +"%F %R ")
 echo "$DAT$USR$(pwd): Finish cronjob!" >> /home/pi/intellicatflap/logs/operation.log
