@@ -9,5 +9,8 @@
 /sandbox/output/*.jpg
 /sandbox/output/*.png
 
+# Logs
+/logs/*.log
+
 # Service Account
 *gcs_serviceaccount.json
