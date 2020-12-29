@@ -34,11 +34,11 @@ def upload_files_to_gcs(local_dir, gcs_dir):
             os.remove(local_file)
 
         # Upload detections file
-        if file=="cat_detection.log":
+        if file.endswith(".log"):
             
             # Create file paths
             local_file = local_dir + file
-            gcs_file = gcs_dir
+            gcs_file = gcs_dir + "cat_detection.log"
             
             # Upload from local to gcs
             blob = bucket.blob(gcs_file)
