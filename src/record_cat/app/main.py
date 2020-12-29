@@ -54,7 +54,7 @@ while(result):
             file_object.write(txt + str(detected))
 
     # Sleep for 1 seconds
-    time.sleep(2) 
+    time.sleep(.5) 
 
 # Release
 videoCaptureObject.release()
