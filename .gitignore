@@ -3,6 +3,7 @@
 /data/*.h264
 /data/*.jpg
 /data/*.png
+/data/*.txt
 /sandbox/output/*.avi
 /sandbox/output/*.mp4
 /sandbox/output/*.h264
