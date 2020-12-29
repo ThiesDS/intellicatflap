@@ -43,7 +43,7 @@ while(result):
 
     # Write to file, if cat was detected or not
     txt = "\n" + img_name + ": "
-    file_destination = img_path + "detections.txt"
+    file_destination = img_path + "cat_detection.log"
     if len(detected_cats)>0:
         detected=1
         with open(file_destination, "a") as file_object:
