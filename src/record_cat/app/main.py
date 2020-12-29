@@ -33,7 +33,7 @@ while(result):
     ret,frame = videoCaptureObject.read()
     
     # Rotate because camera is installed on its head
-    frame_flipped = cv2.rotate(frame, cv2.ROTATE_180)
+    frame_flipped = cv2.rotate(frame, cv2.ROTATE_90)
 
     # Write image to file
     cv2.imwrite(img_destination,frame_flipped)
