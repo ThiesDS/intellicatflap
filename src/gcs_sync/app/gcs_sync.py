@@ -31,7 +31,18 @@ def upload_files_to_gcs(local_dir, gcs_dir):
             blob.upload_from_filename(local_file)
             
             # After uploading, delete it
-            os.remove(local_file) 
+            os.remove(local_file)
+
+        # Upload detections file
+        if file.endswith(".log"):
+            
+            # Create file paths
+            local_file = local_dir + file
+            gcs_file = gcs_dir + "cat_detection.log"
+            
+            # Upload from local to gcs
+            blob = bucket.blob(gcs_file)
+            blob.upload_from_filename(local_file)
 
 def create_folder_path_from_img_filename(filename):
     """
