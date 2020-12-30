@@ -46,7 +46,7 @@ def upload_files_to_gcs(local_dir, gcs_dir):
 
 def create_folder_path_from_img_filename(filename):
     """
-        Takes file name and creates a folder path for gcs: year/month/day/hour/img_second_millisecond.jpg
+        Takes file name and creates a folder path for gcs: year/month/day/hour/minute/img_second_millisecond.jpg
 
         :param: gcs_dir path of gcs file
     """
@@ -55,6 +55,6 @@ def create_folder_path_from_img_filename(filename):
     filename_split = filename.split('_')
     
     # Use blocks to build filepath for gcs
-    gcs_file_path = filename_split[1][0:4] + '/' + filename_split[1][4:6] + '/' + filename_split[1][-2:] + '/' + filename_split[2][:2] + '/' + filename_split[2][2:4] + '_' + filename_split[2][4:13].replace('.','_') + '.' + filename.split('.')[-1]
+    gcs_file_path = filename_split[1][0:4] + '/' + filename_split[1][4:6] + '/' + filename_split[1][-2:] + '/' + filename_split[2][:2] + '/' + filename_split[2][2:4] + '/' + filename_split[2][4:6] + filename_split[2][6:13].replace('.','_') + '.' + filename.split('.')[-1]
 
     return gcs_file_path
