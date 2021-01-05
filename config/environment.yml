@@ -5,3 +5,4 @@ dependencies:
   - google-cloud-storage
   - pip
   - python
+  - pandas
