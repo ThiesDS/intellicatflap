@@ -1,4 +1,4 @@
-/data/*.avi
+*.avi
 /data/*.mp4
 /data/*.h264
 /data/*.jpg

@@ -3,7 +3,7 @@ import pandas as pd
 
 def download_imgs_w_detected_cats():
     # Initialize client and bucket
-    client = storage.Client.from_service_account_json(json_credentials_path='./config/gcs_serviceaccount.json')
+    client = storage.Client.from_service_account_json(json_credentials_path='./src/gcs_sync/gcs_serviceaccount.json')
     bucket = client.get_bucket('intellicatflap')
 
     # Get file with detected cats

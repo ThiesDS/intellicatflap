@@ -1,13 +1,12 @@
-from mtcnn.mtcnn import MTCNN
+#from mtcnn.mtcnn import MTCNN
 import cv2
 
 # Define func to highlight faces in frame
-def highlight_faces(frame, faces):
-    for face in faces:
-        x,y,w,h = face['box']
-        cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),1)
-    
-        cv2.rectangle(frame, ((0,frame.shape[0] -25)),(270, frame.shape[0]), (255,255,255), -1)
+#def highlight_faces(frame, faces):
+#    for face in faces:
+#        x,y,w,h = face['box']
+#        cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),1)    
+#        cv2.rectangle(frame, ((0,frame.shape[0] -25)),(270, frame.shape[0]), (255,255,255), -1)
 
 def highlight_faces2(frame, faces):
     for (x,y,w,h) in faces:
@@ -15,10 +14,10 @@ def highlight_faces2(frame, faces):
         cv2.rectangle(frame, ((0,frame.shape[0] -25)),(270, frame.shape[0]), (255,255,255), -1)
 
 # Instantiate face detector
-detector = MTCNN()
+#detector = MTCNN()
 
 # Alternative, faster face detector
-detector2 = cv2.CascadeClassifier('/home/doctore/raspberrypi/sandbox/haarcascade_frontalcatface_extended.xml')
+detector2 = cv2.CascadeClassifier('haarcascade_frontalcatface_extended.xml')
 
 
 # Create a VideoCapture object and read from input file
@@ -50,7 +49,7 @@ while(True):
         if idx%1 == 0:
             # Detect faces in frame
             #faces = detector.detect_faces(frame)
-            faces = detector2.detectMultiScale(frame)
+            faces = detector2.detectMultiScale(frame, scaleFactor=1.2, minNeighbors=3)
 
             # Highlight faces
             #highlight_faces(frame, faces)
