@@ -8,8 +8,8 @@ echo "$DAT$USR$(pwd): Start cronjob." >> /home/pi/intellicatflap/logs/operation.
 # Go to root directory of project (from whereever you are)
 cd /home/pi/intellicatflap/
 
-# Pull from pi_deployment branch of repository
-git fetch --all && git checkout "pi_deployment" && git pull 
+# Pull from master branch of repository
+git fetch --all && git checkout "master" && git pull 
 
 # Quit service
 /usr/local/bin/docker-compose down -v
