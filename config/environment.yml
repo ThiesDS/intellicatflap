@@ -1,0 +1,7 @@
+name: intellicatflap
+channels:
+  - defaults
+dependencies:
+  - google-cloud-storage
+  - pip
+  - python
