@@ -21,12 +21,12 @@ for file in files:
     img = cv2.imread(local_dir + file) 
 
     # Detect cat
-    faces = detector.detectMultiScale(img, scaleFactor=1.2)#, minNeighbors=3)
+    faces = detector.detectMultiScale(img)#, scaleFactor=1.2)#, minNeighbors=3)
 
     if len(faces)>0:
         # Highlight faces
         highlight_faces(img, faces)
 
         # Save to file again
-        new_file = file.split('.')[0] + '_face2.jpg'
+        new_file = '.'.join(file.split('.')[0:-1]) + '_face.jpg'
         cv2.imwrite(local_dir + new_file, img)

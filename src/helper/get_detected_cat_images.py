@@ -22,8 +22,8 @@ def download_imgs_w_detected_cats():
     df_cat_detection_true = df_cat_detection.query('detect_cat=="1"')
 
     # Specify last n images to download
-    datetime_start = '2020/12/31/00/00'
-    datetime_end = '2021/01/02/00/00'
+    datetime_start = '2021/01/06/00/00'
+    datetime_end = '2021/01/07/00/00'
 
     # Download
     imgs_to_download = df_cat_detection_true['img_name']
