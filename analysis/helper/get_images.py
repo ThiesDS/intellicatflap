@@ -1,17 +1,24 @@
 from google.cloud import storage
 import pandas as pd
 
-def download_imgs_w_detected_cats():
+def download_imgs_w_detected_cats(datetime_start='2021/01/06/00/00', datetime_end='2021/01/07/00/00',gcs_detections='raw/cat_detection.log'):
+    """
+        Helper to download images from gcs bucket within the specified datetimes.
+
+        :param datetime_start: String in the format Year/Month/Day/Hour/Minute
+        :param datetime_end: String in the format Year/Month/Day/Hour/Minute
+        :param gcs_detections: String with the gcs location of the file with detected cats 
+
+    """
     # Initialize client and bucket
     client = storage.Client.from_service_account_json(json_credentials_path='./src/gcs_sync/gcs_serviceaccount.json')
     bucket = client.get_bucket('intellicatflap')
 
     # Get file with detected cats
-    gcs_file = 'raw/cat_detection.log'
     destination_file_name = './data/cat_detection.log'
 
     # Download cat detection file
-    blob = bucket.blob(gcs_file)
+    blob = bucket.blob(gcs_detection_log)
     blob.download_to_filename(destination_file_name)
 
     # Read file into df
@@ -20,10 +27,6 @@ def download_imgs_w_detected_cats():
 
     # Filter all images where cat is detected
     df_cat_detection_true = df_cat_detection.query('detect_cat=="1"')
-
-    # Specify last n images to download
-    datetime_start = '2021/01/06/00/00'
-    datetime_end = '2021/01/07/00/00'
 
     # Download
     imgs_to_download = df_cat_detection_true['img_name']
