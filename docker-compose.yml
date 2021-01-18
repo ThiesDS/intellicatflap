@@ -17,5 +17,6 @@ services:
       context: ./src/gcs_sync
     volumes:
         - ./data:/app/data
+        - ./logs:/app/logs
     depends_on:
       - record-cat
