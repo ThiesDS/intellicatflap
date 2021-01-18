@@ -4,7 +4,6 @@
 /data/*.jpg
 /data/*.png
 /data/*.log
-/data/detected_cats/*.jpg
 /sandbox/output/*.avi
 /sandbox/output/*.mp4
 /sandbox/output/*.h264
