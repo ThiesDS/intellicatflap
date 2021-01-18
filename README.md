@@ -6,7 +6,7 @@ This is work in progress and based on the idea of Ben Hamm.
 
 ## Run service on pi
 
-To build and/or run the service, use
+To build and/or run the service, use the following:
 
 ```bash
 docker-compose up
