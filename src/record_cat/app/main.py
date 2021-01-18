@@ -11,7 +11,7 @@ cwd = os.getcwd()
 videoCaptureObject = cv2.VideoCapture(0)
 
 # Instantiate cv2-cat detector
-detector_path = cwd + "/config/"
+detector_path = cwd + "/models/pretrained/"
 detector_type = "haarcascade_frontalcatface_extended.xml"
 cat_detector = cv2.CascadeClassifier(detector_path + detector_type)
 
