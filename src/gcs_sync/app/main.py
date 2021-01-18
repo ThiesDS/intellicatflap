@@ -14,12 +14,12 @@ while True:
     time.sleep(5)
     
     # Upload images and detections files to gcs
-    gcs_sync.upload_images_to_gcs(local_dir=cwd + '/data/',gcs_dir='raw/operations/')
+    gcs_sync.upload_images_to_gcs(local_dir=cwd + '/data/',gcs_dir='raw/')
 
     # Upload operation log files
     if os.path.exists(detection_log_file):
-        gcs_sync.upload_file_to_gcs(local_file=detection_log_file,gcs_file='raw/detections/detection_raw_cv2.log')
+        gcs_sync.upload_file_to_gcs(local_file=detection_log_file,gcs_file='detections/detection_raw_cv2.log')
 
     # Upload operation log files
     if os.path.exists(operation_log_file):
-        gcs_sync.upload_file_to_gcs(local_file=operation_log_file,gcs_file='raw/ops/operation.log')
+        gcs_sync.upload_file_to_gcs(local_file=operation_log_file,gcs_file='ops/operation.log')
