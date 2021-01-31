@@ -39,7 +39,7 @@ while(result):
     cv2.imwrite(img_destination,frame_flipped)
 
     # If a cat is detected, this returns a list of rectangles
-    detected_cats = cat_detector.detectMultiScale(frame_flipped) 
+    #detected_cats = cat_detector.detectMultiScale(frame_flipped) 
 
     # Write to file, if cat was detected or not
     #txt = "\n" + img_name + ": "
