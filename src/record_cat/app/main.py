@@ -42,16 +42,16 @@ while(result):
     detected_cats = cat_detector.detectMultiScale(frame_flipped) 
 
     # Write to file, if cat was detected or not
-    txt = "\n" + img_name + ": "
-    file_destination = img_path + "cat_detection.log"
-    if len(detected_cats)>0:
-        detected=1
-        with open(file_destination, "a") as file_object:
-            file_object.write(txt + str(detected))
-    else:
-        detected=0
-        with open(file_destination, "a") as file_object:
-            file_object.write(txt + str(detected))
+    #txt = "\n" + img_name + ": "
+    #file_destination = img_path + "cat_detection.log"
+    #if len(detected_cats)>0:
+    #    detected=1
+    #    with open(file_destination, "a") as file_object:
+    #        file_object.write(txt + str(detected))
+    #else:
+    #    detected=0
+    #    with open(file_destination, "a") as file_object:
+    #        file_object.write(txt + str(detected))
 
     # Sleep for 1 seconds
     time.sleep(.5) 

@@ -7,7 +7,6 @@ services:
       context: ./src/record_cat
     volumes:
         - ./data:/app/data
-        - ./models:/app/models
     devices:
         - "/dev/video0:/dev/video0"      
 
