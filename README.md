@@ -9,7 +9,7 @@ This is work in progress and based on the idea of Ben Hamm.
 To build and/or run the service, use the following:
 
 ```bash
-docker-compose up
+docker-compose up --build
 ```
 
 To build a singe service, use
