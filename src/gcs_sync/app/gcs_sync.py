@@ -15,10 +15,13 @@ def upload_images_to_gcs(local_dir, gcs_dir):
 
     # Get all images in data folder
     files = os.listdir(local_dir)
+    
+    # Get first 500
+    files = files[:500]
 
     # Upload and delete file from local storage
     for file in files:
-        
+         
         # Upload only jpg images
         if file.endswith(".jpg"):
             

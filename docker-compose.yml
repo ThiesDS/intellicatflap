@@ -17,5 +17,3 @@ services:
     volumes:
         - ./data:/app/data
         - ./logs:/app/logs
-    depends_on:
-      - record-cat
