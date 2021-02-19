@@ -23,18 +23,25 @@ def upload_images_to_gcs(local_dir, gcs_dir):
     for file in files:
          
         # Upload only jpg images
-        if file.endswith(".jpg"):
+        if file.endswith(".catdetect"):
             
             # Create file paths
-            local_file = local_dir + file
-            gcs_file = gcs_dir + create_folder_path_from_img_filename(file)
+            local_image_file = local_dir + file.replace('.catdetect','.jpg')
+            local_detection_file = local_dir + file
+            
+            gcs_image_file = gcs_dir + create_folder_path_from_img_filename(local_image_file)
+            gcs_detection_file = gcs_dir + create_folder_path_from_img_filename(local_detection_file)
             
             # Upload from local to gcs
-            blob = bucket.blob(gcs_file)
-            blob.upload_from_filename(local_file)
+            blob_image = bucket.blob(gcs_image_file)
+            blob_image.upload_from_filename(local_image_file)
+
+            blob_detection = bucket.blob(gcs_detection_file)
+            blob_detection.upload_from_filename(local_detection_file)
             
             # After uploading, delete it
-            os.remove(local_file)
+            os.remove(local_image_file)
+            os.remove(local_detection_file)
 
 def upload_file_to_gcs(local_file, gcs_file):
     """
