@@ -4,6 +4,8 @@ import os
 from pathlib import Path
 from datetime import datetime
 
+from utils import motion_detector
+
 # Get current working directory
 cwd = os.getcwd()
 
@@ -15,6 +17,8 @@ img_path = cwd + "/data/"
 
 # Paramter for motion filter (later to be replaced by docker env var)
 motion_filter = True
+frame_before = None
+thresh = 8
 
 while True:
 
