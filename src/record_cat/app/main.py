@@ -18,7 +18,7 @@ img_path = cwd + "/data/"
 # Paramter for motion filter (later to be replaced by docker env var)
 motion_filter = True
 frame_before = None
-thresh = 8
+thresh = 10
 
 while True:
 
