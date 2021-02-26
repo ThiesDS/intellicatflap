@@ -17,3 +17,4 @@ services:
     volumes:
         - ./data:/app/data
         - ./logs:/app/logs
+    restart: always
