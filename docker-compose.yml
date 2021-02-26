@@ -10,6 +10,13 @@ services:
     devices:
         - "/dev/video0:/dev/video0"      
 
+  detect-cat:
+    image: catdetector:v1
+    build:
+      context: ./src/detect_cat
+    volumes:
+        - ./data:/app/data
+
   gcs-sync:
     image: interactwgcs:v1
     build:
