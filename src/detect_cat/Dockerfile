@@ -1,4 +1,5 @@
-FROM python:3.6-buster
+# Not an official base image, but it runs tf2 on arm architectures
+FROM francoisgervais/tensorflow:2.1.0-cp35
 LABEL maintainer "Sven Thies <sven_thies@web.de>"
 
 # Upgrade pip
