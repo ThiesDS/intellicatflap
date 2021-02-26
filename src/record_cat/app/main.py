@@ -4,54 +4,50 @@ import os
 from pathlib import Path
 from datetime import datetime
 
+from utils import motion_detector
+
 # Get current working directory
 cwd = os.getcwd()
 
 # instatiate webcam video capture
 videoCaptureObject = cv2.VideoCapture(0)
 
-# Instantiate cv2-cat detector
-detector_path = cwd + "/models/pretrained/"
-detector_type = "haarcascade_frontalcatface_extended.xml"
-#cat_detector = cv2.CascadeClassifier(detector_path + detector_type)
-
 # Initiate additional varialbes and paramters
-result = True
 img_path = cwd + "/data/"
 
-while(result):
+# Paramter for motion filter (later to be replaced by docker env var)
+motion_filter = True
+frame_before = None
+thresh = 10
 
-    # Create timestamp
-    time_curr = datetime.now()
-    time_formatted = time_curr.strftime('%Y%m%d_%H%M%S.%f')
-
-    # Create image name with timestamp
-    img_name = "img_" + str(time_formatted) + ".jpg"
-    img_destination = img_path + img_name  
+while True:
 
     # Capture webcam video
     ret,frame = videoCaptureObject.read()
-    
-    # Rotate because camera is installed on its head
-    frame_flipped = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
 
-    # Write image to file
-    cv2.imwrite(img_destination,frame_flipped)
+    # Optional motion filter
+    if motion_filter:
+        motion,frame_before = motion_detector(frame,frame_before,thresh)
+    else:
+        # if motion filter is off, always save image
+        motion = True
 
-    # If a cat is detected, this returns a list of rectangles
-    #detected_cats = cat_detector.detectMultiScale(frame_flipped) 
+    # If motion is detected, save image
+    if motion:
+        
+        # Create timestamp
+        time_curr = datetime.now()
+        time_formatted = time_curr.strftime('%Y%m%d_%H%M%S.%f')
 
-    # Write to file, if cat was detected or not
-    #txt = "\n" + img_name + ": "
-    #file_destination = img_path + "cat_detection.log"
-    #if len(detected_cats)>0:
-    #    detected=1
-    #    with open(file_destination, "a") as file_object:
-    #        file_object.write(txt + str(detected))
-    #else:
-    #    detected=0
-    #    with open(file_destination, "a") as file_object:
-    #        file_object.write(txt + str(detected))
+        # Create image name with timestamp
+        img_name = "img_" + str(time_formatted) + ".jpg"
+        img_destination = img_path + img_name  
+
+        # Rotate and write
+        frame_flipped = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
+
+        # Write image to file
+        cv2.imwrite(img_destination,frame_flipped)
 
     # Sleep for 1 seconds
     time.sleep(.5) 
