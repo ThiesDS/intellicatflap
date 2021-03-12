@@ -58,7 +58,7 @@ async def fetch_all(image_paths):
 
 
 # Sample data for testing purposes from git repository intellicatflap_analytics
-image_dir = '/intellicatflap_analytics/sample_data/calibration_sample/'
+image_dir = '/app/test_data'
 
 # Get image paths 
 files = os.listdir(image_dir)
