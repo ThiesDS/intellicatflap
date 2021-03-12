@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DOCKER_BUILDKIT=1
+
 logs_dir=$HOME/intellicatflap/logs
 
 if [ $3 = 'build_true' ]; then
