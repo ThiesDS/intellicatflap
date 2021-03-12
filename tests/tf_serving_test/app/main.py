@@ -5,8 +5,23 @@ import time
 import aiohttp
 import asyncio
 import random
+import logging
+
+from logging import FileHandler
 
 import numpy as np
+
+# Prepare logging
+LOG_FILE_PATH = '/apps/logs/'
+log_file_name = 'tf_serving_test.log'
+
+file_handler = FileHandler(LOG_FILE_PATH + log_file_name)
+file_handler.setFormatter(FORMATTER)
+
+logger = logging.getLogger('tf_serving_test')
+logger.setLevel(logging.DEBUG)
+logger.addHandler(file_handler)
+
 
 # Functions to send asyncronous requests to tf-serving api
 async def fetch(session, url, data, headers):
@@ -53,23 +68,23 @@ headers = {"content-type": "application/json"}
 
 # Warmup
 print("Warmup") # TODO: Replace with logging module.
+logger.info("Started tf serving test, warming up.")
 start_time = time.time()
 responses = asyncio.run(fetch_all(image_paths[:3]))
-print(f"It took {time.time() - start_time}s to process {len(image_paths[:3])} images.")
+logger.info(f"Warm-up: It took {time.time() - start_time}s to process {len(image_paths[:3])} images.")
 
 # Real testing
 start_time = time.time() # TODO: Replace with logging module.
 responses = asyncio.run(fetch_all(image_paths))
-print(f"It took {time.time() - start_time}s to process {len(image_paths)} images.")  # TODO: Replace with logging module.
+logger.info(f"Run 1: It took {time.time() - start_time}s to process {len(image_paths)} images.")
+
+random.shuffle(image_paths)
+start_time = time.time()
+responses = asyncio.run(fetch_all(image_paths))
+logger.info(f"Run 2: It took {time.time() - start_time}s to process {len(image_paths)} images.")
 
 
 random.shuffle(image_paths)
 start_time = time.time()
 responses = asyncio.run(fetch_all(image_paths))
-print(f"It took {time.time() - start_time}s to process {len(image_paths)} images.")  # TODO: Replace with logging module.
-
-
-random.shuffle(image_paths)
-start_time = time.time()
-responses = asyncio.run(fetch_all(image_paths))
-print(f"It took {time.time() - start_time}s to process {len(image_paths)} images.") # TODO: Replace with logging module.
+logger.info(f"Run 3: It took {time.time() - start_time}s to process {len(image_paths)} images.")
