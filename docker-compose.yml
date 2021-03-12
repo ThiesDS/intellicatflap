@@ -24,13 +24,6 @@ services:
         - 8501:8501 # This might not be necessary, bc container-container communication is done within the network.
     restart: always
 
-  tf-serving-test:
-    image: tensorflow-serving-test
-    build:
-        context: ./tests/tf_serving_test
-    volumes:
-        - ./logs:/app/logs
-
   gcs-sync:
     image: interactwgcs:v1
     build:

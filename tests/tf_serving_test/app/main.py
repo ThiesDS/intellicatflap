@@ -8,15 +8,16 @@ import random
 import logging
 
 from logging import FileHandler
+from PIL import Image
 
 import numpy as np
 
 # Prepare logging
-LOG_FILE_PATH = '/apps/logs/'
+LOG_FILE_PATH = '/app/logs/'
 log_file_name = 'tf_serving_test.log'
 
 file_handler = FileHandler(LOG_FILE_PATH + log_file_name)
-file_handler.setFormatter(FORMATTER)
+#file_handler.setFormatter(FORMATTER)
 
 logger = logging.getLogger('tf_serving_test')
 logger.setLevel(logging.DEBUG)
@@ -34,11 +35,14 @@ async def fetch_all(image_paths):
     async with aiohttp.ClientSession() as session:
         tasks = []
         for image_path in image_paths:
-            image_np = cv2.imread(image_path).astype('uint8')
+            #image_np = cv2.imread(image_path).astype('uint8')
+            image = Image.open(image_path)
+            image_np = np.asarray(image)
+            image_np = image_np.astype('uint8')
             image_np = np.expand_dims(image_np, axis=0)
             image_list = image_np.tolist()
             
-            url = 'http://localhost:8501/v1/models/resnet:predict'
+            url = 'http://tf-serving:8501/v1/models/resnet:predict'
             data = json.dumps({"signature_name": "serving_default", "instances": image_list})
             
             tasks.append(

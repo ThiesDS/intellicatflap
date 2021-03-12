@@ -3,7 +3,7 @@
 logs_dir=$HOME/intellicatflap/logs
 
 if [ $3 = 'build_true' ]; then
-	docker build -t interactwgcs:$1 .
+	docker build  --ssh default -t interactwgcs:$1 .
 fi
 
 if [ $2 = 'it' ]; then
