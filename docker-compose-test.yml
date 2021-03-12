@@ -4,9 +4,17 @@ services:
   tf-serving:
     image: emacski/tensorflow-serving:2.4.1-linux_arm_armv7-a_neon_vfpv4
     volumes:
-        - ./src/tf_serving/models/:/models/mobilenet/1/
+        - ./src/tf_serving/models:/models/mobilenet/1
+        - ./src/tf_serving/config:/config
     ports:
+        - 8500:8500 # This might not be necessary, bc container-container communication is done within the network.
         - 8501:8501 # This might not be necessary, bc container-container communication is done within the network.
+    environment: 
+        - MODEL_NAME=mobilenet
+        - TF_CPP_MIN_VLOG_LEVEL=1
+    command: 
+        - ["--enable_batching"]
+        - ["--batching_parameters_file=/config/batching_config.txt"]
     restart: always
 
   tf-serving-test:
