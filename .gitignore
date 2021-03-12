@@ -1,3 +1,4 @@
+# Data
 *.avi
 /data/*.mp4
 /data/*.h264
@@ -9,6 +10,9 @@
 /sandbox/output/*.h264
 /sandbox/output/*.jpg
 /sandbox/output/*.png
+
+# Models
+src/tf_serving/models/*
 
 # Logs
 /logs/*.log
