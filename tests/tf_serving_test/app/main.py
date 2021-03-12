@@ -12,12 +12,15 @@ from PIL import Image
 
 import numpy as np
 
+print('Hello')
+
 # Prepare logging
 LOG_FILE_PATH = '/app/logs/'
 log_file_name = 'tf_serving_test.log'
+FORMATTER = logging.Formatter('%(asctime)s|%(name)s|%(levelname)s|%(funcName)s:%(lineno)d|%(message)s')
 
 file_handler = FileHandler(LOG_FILE_PATH + log_file_name)
-#file_handler.setFormatter(FORMATTER)
+file_handler.setFormatter(FORMATTER)
 
 logger = logging.getLogger('tf_serving_test')
 logger.setLevel(logging.DEBUG)
@@ -58,7 +61,7 @@ async def fetch_all(image_paths):
 
 
 # Sample data for testing purposes from git repository intellicatflap_analytics
-image_dir = '/app/test_data'
+image_dir = '/app/test_imgs/'
 
 # Get image paths 
 files = os.listdir(image_dir)
@@ -70,8 +73,10 @@ image_paths.sort()
 # Prepare request
 headers = {"content-type": "application/json"}
 
+logger.info("Wait until server is set up.")
+time.sleep(30)
+
 # Warmup
-print("Warmup") # TODO: Replace with logging module.
 logger.info("Started tf serving test, warming up.")
 start_time = time.time()
 responses = asyncio.run(fetch_all(image_paths[:3]))
