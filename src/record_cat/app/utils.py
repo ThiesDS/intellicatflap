@@ -1,10 +1,11 @@
 import numpy as np
+import os
 import logging
 from datetime import datetime
 
 # Configure logging
 time = datetime.today()
-log_file_path = '/logs/'
+log_file_path = os.getcwd() + '/logs/'
 log_file_name = 'log_' + time.strftime('%Y%m%d%H%M%S') + '.log'
 FORMATTER = logging.Formatter('%(asctime)s|%(name)s|%(levelname)s|%(funcName)s:%(lineno)d|%(message)s')
 
