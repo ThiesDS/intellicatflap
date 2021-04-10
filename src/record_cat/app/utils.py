@@ -1,4 +1,19 @@
 import numpy as np
+import logging
+from datetime import datetime
+
+# Configure logging
+time = datetime.today()
+log_file_path = '/logs/'
+log_file_name = 'log_' + time.strftime('%Y%m%d%H%M%S') + '.log'
+FORMATTER = logging.Formatter('%(asctime)s|%(name)s|%(levelname)s|%(funcName)s:%(lineno)d|%(message)s')
+
+file_handler = logging.FileHandler(log_file_path + log_file_name)
+file_handler.setFormatter(FORMATTER)
+
+logger = logging.getLogger('record_cat_' + __name__)
+logger.setLevel(logging.DEBUG)
+logger.addHandler(file_handler)
 
 def motion_detector(frame,frame_before,thresh):
 
@@ -16,6 +31,9 @@ def motion_detector(frame,frame_before,thresh):
         else:
             motion = False
     
+    # Log motion sensor infos
+    logger.info('Image Diff: ' + str(round(img_diff_sq_sum,1)) + ': Motion: ' + str(motion))
+
     # Switch for next one
     frame_before = frame
 
