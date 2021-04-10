@@ -36,7 +36,7 @@ def motion_detector(frame,frame_before,thresh):
             motion = False
     
         # Log motion sensor infos
-        logger.info('Image Diff: ' + str(round(img_diff_sq_sum,1)) + ': Motion: ' + str(motion))
+        #logger.info('Image Diff: ' + str(round(img_diff_sq_sum,1)) + ': Motion: ' + str(motion))
 
     # Switch for next one
     frame_before = frame
