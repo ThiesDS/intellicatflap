@@ -1,22 +1,6 @@
 import numpy as np
 import os
-import logging
 from datetime import datetime
-
-# Configure logging
-time = datetime.today()
-log_file_path = os.getcwd() + '/logs/'
-log_file_name = 'log_' + time.strftime('%Y%m%d%H%M%S') + '.log'
-FORMATTER = logging.Formatter('%(asctime)s|%(name)s|%(levelname)s|%(funcName)s:%(lineno)d|%(message)s')
-
-file_handler = logging.FileHandler(log_file_path + log_file_name)
-file_handler.setFormatter(FORMATTER)
-
-logger = logging.getLogger('record_cat_' + __name__)
-logger.setLevel(logging.DEBUG)
-logger.addHandler(file_handler)
-
-logger.info('Start logging')
 
 
 def motion_detector(frame,frame_before,thresh):
