@@ -15,6 +15,9 @@ logger = logging.getLogger('record_cat_' + __name__)
 logger.setLevel(logging.DEBUG)
 logger.addHandler(file_handler)
 
+logger.info('Start logging')
+
+
 def motion_detector(frame,frame_before,thresh):
 
     if frame_before==None:
