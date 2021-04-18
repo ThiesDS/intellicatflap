@@ -20,8 +20,13 @@ services:
 
   tf-serving:
     image: emacski/tensorflow-serving:2.4.1-linux_arm_armv7-a_neon_vfpv4
+    environment: 
+        - MODEL_NAME=cat_classifier
+    volumes:
+        - ./models/cat_classifier/saved_model:/app/models/cat_classifier/1/
     ports:
         - 8501:8501 # This might not be necessary, bc container-container communication is done within the network.
+    
     restart: always
 
   gcs-sync:

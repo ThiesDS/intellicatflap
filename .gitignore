@@ -12,7 +12,9 @@
 /sandbox/output/*.png
 
 # Models
-src/tf_serving/models/*
+*.pb
+variables
+assets
 
 # Logs
 /logs/*.log
