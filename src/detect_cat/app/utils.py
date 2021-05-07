@@ -1,45 +1,30 @@
-from six import BytesIO
-from PIL import Image, ImageDraw, ImageFont
+from keras.preprocessing.image import load_img
+from keras.preprocessing.image import img_to_array
 
-import numpy as np
-import tensorflow as tf
 
-def load_image_into_numpy_array(path):
-  """Load an image from file into a numpy array.
-
-  Puts image into numpy array to feed into tensorflow graph.
-  Note that by convention we put it into a numpy array with shape
-  (height, width, channels), where channels=3 for RGB.
-
-  Args:
-    path: the file path to the image
-
-  Returns:
-    uint8 numpy array with shape (img_height, img_width, 3)
-  """
-  img_data = tf.io.gfile.GFile(path, 'rb').read()
-
-  image = Image.open(BytesIO(img_data))
-
-  image = image.resize((640,640))
-  
-  (im_width, im_height) = image.size
-
-  image_array = np.array(image.getdata()).reshape((im_height, im_width, 3)).astype(np.uint8)
-  
-  return image_array
-
-def get_model_detection_function(model):
-  """Get a tf.function for detection."""
-
-  @tf.function
-  def detect_fn(image):
-    """Detect objects in image."""
+def load_image(filename):
     
-    image, shapes = model.preprocess(image)
-    prediction_dict = model.predict(image, shapes)
-    detections = model.postprocess(prediction_dict, shapes)
+  # load the image
+  img = load_img(filename, target_size=(224, 224))
+  
+  # convert to array
+  img = img_to_array(img)
+  
+  # reshape into a single sample with 3 channels
+  img = img.reshape(1, 224, 224, 3)
+  
+  # center pixel data
+  img = img.astype('float32')
+  img = img - [123.68, 116.779, 103.939]
+  
+  return img
 
-    return detections, prediction_dict, tf.reshape(shapes, [-1])
 
-  return detect_fn
+def save_detections(image_path):
+
+  # Path with name of file with detection information
+  cat_detection_path = image.replace('.jpg','.catdetected')
+
+  # Write empty file
+  with open(cat_detection_path, "w") as file:
+      file.write()
