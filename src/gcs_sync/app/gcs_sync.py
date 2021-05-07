@@ -28,15 +28,17 @@ def upload_images_to_gcs(local_dir, gcs_dir):
             if file_catdetected in files:
                 
                 # Path to cat folder
-                gcs_image_file = gcs_dir + 'cat/' + create_folder_path_from_img_filename(local_image_file)
+                gcs_image_file = gcs_dir + 'cat/' + create_folder_path_from_img_filename(file)
             
             else: 
                 
                 # Path to no cat folder
-                gcs_image_file = gcs_dir + 'no_cat/' + create_folder_path_from_img_filename(local_image_file)
+                gcs_image_file = gcs_dir + 'no_cat/' + create_folder_path_from_img_filename(file)
             
             # Upload from local to gcs
             blob_image = bucket.blob(gcs_image_file)
+            
+            local_image_file_path = local_dir + file
             blob_image.upload_from_filename(local_image_file)
             
             # After uploading, delete it
