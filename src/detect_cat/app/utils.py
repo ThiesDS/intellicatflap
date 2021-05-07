@@ -23,8 +23,8 @@ def load_image(filename):
 def save_detections(image_path):
 
   # Path with name of file with detection information
-  cat_detection_path = image.replace('.jpg','.catdetected')
+  cat_detection_path = image_path.replace('.jpg','.catdetected')
 
   # Write empty file
   with open(cat_detection_path, "w") as file:
-      file.write()
+      file.write('')

@@ -16,4 +16,7 @@ def detect_cat(image_path):
   # Cat: 0; No Cat: 1
   cat_probability = json.loads(json_response.text)['predictions'][0][0]
 
+  # Reverse: Cat 1; No Cat: 0
+  cat_probabilitiy = 1-cat_probabilitiy
+
   return cat_probability
