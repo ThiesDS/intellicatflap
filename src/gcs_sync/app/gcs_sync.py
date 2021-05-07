@@ -56,6 +56,6 @@ def create_folder_path_from_img_filename(filename):
     filename_split = filename.split('_')
     
     # Use blocks to build filepath for gcs
-    gcs_file_path = filename_split[1][0:4] + '/' + filename_split[1][4:6] + '/' + filename_split[1][-2:] + '/' + filename_split[2][:2] + '/' + filename_split[2][2:4] + '/' + filename_split[2][4:6] + filename_split[2][6:13].replace('.','_') + '.' + filename.split('.')[-1]
+    gcs_file_path = filename_split[1][0:4] + '/' + filename_split[1][4:6] + '/' + filename_split[1][-2:] + '/' + filename_split[2][:2] + '/' + filename_split[2][2:4] + '/' + filename_split[2][4:6] + '/' + '_'.join(filename.split('.')[:-1]) + '.' + filename.split('.')[-1]
 
     return gcs_file_path
