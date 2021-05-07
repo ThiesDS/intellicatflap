@@ -15,9 +15,6 @@ def upload_images_to_gcs(local_dir, gcs_dir):
 
     # Get all images in data folder
     files = os.listdir(local_dir)
-    
-    # Get first 500
-    files = files[:500]
 
     # Upload and delete file from local storage
     for file in files:
@@ -25,34 +22,25 @@ def upload_images_to_gcs(local_dir, gcs_dir):
         # Upload only jpg images
         if file.endswith(".jpg"):
             
-            # Create file paths
-            local_image_file = local_dir + file.replace('.catdetect','.jpg')
+            # This file should exist if a cat was detected
+            file_catdetected = file.replace('.jpg','.catdetected')
             
-            gcs_image_file = gcs_dir + create_folder_path_from_img_filename(local_image_file)
+            if file_catdetected in files:
+                
+                # Path to cat folder
+                gcs_image_file = gcs_dir + 'cat/' + create_folder_path_from_img_filename(local_image_file)
+            
+            else: 
+                
+                # Path to no cat folder
+                gcs_image_file = gcs_dir + 'no_cat/' + create_folder_path_from_img_filename(local_image_file)
             
             # Upload from local to gcs
             blob_image = bucket.blob(gcs_image_file)
             blob_image.upload_from_filename(local_image_file)
-
             
             # After uploading, delete it
             os.remove(local_image_file)
-
-def upload_file_to_gcs(local_file, gcs_file):
-    """
-        Uploads all files in local_dir to gcs_dir in bucket
-
-        :param: local_dir: Path where the data is located locally
-        :param: gcs_dir: Path where the data shall be uplaoded on gcs bucket
-    """
-
-    # Set credentials using the downloaded JSON file and get bucket object
-    client = storage.Client.from_service_account_json(json_credentials_path='gcs_serviceaccount.json')
-    bucket = client.get_bucket('intellicatflap')
-    
-    # Upload from local to gcs
-    blob = bucket.blob(gcs_file)
-    blob.upload_from_filename(local_file)
 
 
 def create_folder_path_from_img_filename(filename):
