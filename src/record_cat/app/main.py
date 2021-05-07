@@ -1,10 +1,27 @@
 import cv2
 import time
 import os
+import logging
 from pathlib import Path
 from datetime import datetime
 
 from utils import motion_detector
+
+
+# Configure logging
+log_time = datetime.today()
+log_file_path = os.getcwd() + '/logs/'
+log_file_name = 'log_' + log_time.strftime('%Y%m%d%H%M%S') + '.log'
+FORMATTER = logging.Formatter('%(asctime)s|%(name)s|%(levelname)s|%(funcName)s:%(lineno)d|%(message)s')
+
+file_handler = logging.FileHandler(log_file_path + log_file_name)
+file_handler.setFormatter(FORMATTER)
+
+logger = logging.getLogger('record_cat_' + __name__)
+logger.setLevel(logging.DEBUG)
+logger.addHandler(file_handler)
+
+logger.info('Start service')
 
 # Get current working directory
 cwd = os.getcwd()
@@ -18,9 +35,11 @@ img_path = cwd + "/data/"
 # Paramter for motion filter (later to be replaced by docker env var)
 motion_filter = True
 frame_before = None
-thresh = 10
+thresh = 20
 
 while True:
+
+    logger.info('Enter loop.')
 
     # Capture webcam video
     ret,frame = videoCaptureObject.read()
