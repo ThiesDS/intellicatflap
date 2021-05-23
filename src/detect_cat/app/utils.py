@@ -1,6 +1,6 @@
+import numpy as np
 from keras.preprocessing.image import load_img, img_to_array
 from typing import Tuple
-import numpy as np
 
 
 def load_image(filename: str, target_size: Tuple[int] = (224, 224)) -> np.array:
