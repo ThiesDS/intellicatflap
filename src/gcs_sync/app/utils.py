@@ -65,9 +65,10 @@ def upload_images_to_gcs(local_dir: str, gcs_dir: str, gcs_credentials_path: str
             # After uploading, delete it
             os.remove(local_image_file_path)
 
-            # FIX ME: That functionality should be optimized. Remove also the helper files - That is not working!
-            # if file_cat_detected in files:
-            #     os.remove(file_cat_detected)
+            #FIXME: Make me pretty
+            if file_cat_detected in files:
+                path_cat_detected = os.path.normpath(os.path.join(local_dir, file_cat_detected))
+                os.remove(path_cat_detected)
 
         logger.debug(
             "Iterataion {iteration} of {number_of_files} - Processing {image_name} - DONE!".format(

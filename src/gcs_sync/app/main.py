@@ -1,5 +1,3 @@
-import os
-import time
 import argparse
 import logging
 from utils import upload_images_to_gcs
@@ -9,11 +7,9 @@ logger.addHandler(logging.NullHandler())
 
 
 def main(image_dir: str, gcs_destination: str, gcs_credentials_path: str, bucket_name: str) -> None:
-    # Infinite loop
+
     logger.info("Starting gcs sync loop loop")
     while True:
-        # Wait while camera will take photos
-        time.sleep(1)
 
         # Upload images and detections files to gcs
         upload_images_to_gcs(
@@ -48,5 +44,5 @@ if __name__ == "__main__":
         image_dir=args.image_dir,
         gcs_destination=args.gcs_destination,
         gcs_credentials_path=args.credentials_path,
-        bucket_name=args.bucket_name
+        bucket_name=args.bucket_name,
     )

@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  detect-cat:
+    image: catdetector:v1
+    build:
+      context: /Users/felix/Documents/projects/intellicatflap/src/detect_cat
+    command: ["python","main.py","-i","/app/data","-u","/app/uploads","-t","http://tf-serving:8501/v1/models/cat_classifier:predict","-q"]
+    volumes:
+      - ./data:/app/data
+      - ./upload_dir:/app/uploads
+    restart: always
+  tf-serving:
+    image: tensorflow/serving
+    environment:
+        - MODEL_NAME=cat_classifier
+        - MODEL_BASE_PATH=/models
+    volumes:
+        - ./models/cat_classifier/saved_model:/models/cat_classifier/1/
+    ports:
+        - 8500:8500
+        - 8501:8501
+    restart: always
+  gcs-sync:
+    image: interactwgcs:v1
+    build:
+      context: /Users/felix/Documents/projects/intellicatflap/src/gcs_sync
+    command: ["python","main.py","-i","/app/data","-g","classified/","-c","/app/gcs_serviceaccount.json","-b","intellicatflaptest","-v"]
+    volumes:
+      - ./upload_dir:/app/data
+      - ./credentials/gcs_serviceaccount.json:/app/gcs_serviceaccount.json
+    restart: always
+

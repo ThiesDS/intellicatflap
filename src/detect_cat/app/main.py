@@ -1,14 +1,17 @@
 import os
 import argparse
 import logging
+import shutil
+
 from classifier import detect_cat
 from utils import save_detections
+import glob
 
 logger = logging.getLogger("intellicatflap.cat-detector")
 logger.addHandler(logging.NullHandler())
 
 
-def main(image_dir: str, cat_probability_threshold: float, url: str) -> None:
+def main(image_dir: str, upload_dir: str, cat_probability_threshold: float, url: str) -> None:
     """ """
     logger.info("Starting cat detector loop")
     while True:
@@ -41,22 +44,25 @@ def main(image_dir: str, cat_probability_threshold: float, url: str) -> None:
                         image_name=image, cat_probability=cat_probability
                     )
                 )
+            wildcard_path = image_path.replace("jpg", "*")
+            files_to_move = glob.glob(wildcard_path)
+            for file in files_to_move:
+                shutil.move(file, upload_dir)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Classify cats")
-    parser.add_argument(
-        "-i", "--image-dir", type=str, help="Path to directories where images are detected", default="/data"
-    )
+    parser.add_argument("-i", "--image-dir", type=str, help="Path to directories where images are detected")
+    parser.add_argument("-u", "--upload-dir", type=str, help="Path where processed images will be moved")
     parser.add_argument(
         "-c",
         "--cat-probability-threshold",
-        type=int,
+        type=float,
         help="The probability threshold where image is seen as a cat",
         default=0.3,
     )
     parser.add_argument(
-        "-u",
+        "-t",
         "--tensorflow-url",
         type=str,
         help="URL of tensorflow serve",
@@ -75,4 +81,9 @@ if __name__ == "__main__":
 
     logging.basicConfig(format="%(asctime)s - %(name)s - %(message)s", level=log_level)
 
-    main(image_dir=args.image_dir, cat_probability_threshold=args.cat_probability_threshold, url=args.tensorflow_url)
+    main(
+        image_dir=args.image_dir,
+        upload_dir=args.upload_dir,
+        cat_probability_threshold=args.cat_probability_threshold,
+        url=args.tensorflow_url,
+    )
