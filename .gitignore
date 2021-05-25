@@ -24,3 +24,7 @@ assets
 
 # Mac Finder specific
 *.DS_Store
+
+__pycache__
+.idea/
+venv/

@@ -1,26 +1,21 @@
-FROM python:3.9.0-buster
+FROM python:3.9.0-slim-buster
+
 LABEL maintainer "Sven Thies <sven_thies@web.de>"
 
-# Upgrade pip
-RUN python -m pip install --upgrade pip
-
-# Create app folder
-RUN mkdir /app/
-WORKDIR /app/
-
-# Install python requirements
 COPY requirements.txt .
-RUN pip install --requirement requirements.txt
 
-# Copy app
+RUN python -m pip install --upgrade pip \
+&&  pip install -r requirements.txt \
+&&  mkdir /app \
+&&  mkdir /app/credentials \
+&&  rm -rf /root/.cache \
+&&  apt-get -qqy autoremove --purge \
+&&  useradd -ms /bin/bash gcssync
+
+USER gcssync
+
+WORKDIR app/
+
 COPY app .
 
-# Add service account credentials
-COPY gcs_serviceaccount.json .
-
-# Add non-root user
-RUN useradd -ms /bin/bash duser
-USER duser
-
-# Run app
 CMD ["python","main.py"]
