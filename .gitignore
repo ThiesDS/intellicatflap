@@ -10,6 +10,11 @@
 /sandbox/output/*.jpg
 /sandbox/output/*.png
 
+# Models
+*.pb
+variables
+assets
+
 # Logs
 /logs/*.log
 
