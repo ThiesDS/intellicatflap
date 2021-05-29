@@ -1,5 +1,6 @@
 import logging
 import google.cloud.logging
+from typing import Callable
 from google.cloud.logging.handlers import CloudLoggingHandler
 
 
@@ -8,19 +9,19 @@ FORMATTER = logging.Formatter("%(asctime)s|%(name)s|%(levelname)s|%(funcName)s:%
 
 
 # Define console handler
-def get_console_handler():
+def get_console_handler() -> Callable:
     """
         Get console handler.
     """
 
     # Define console handler and formatting
-    console_handler = logging.streamHandler(sys.stdout)
+    console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setFormatter(FORMATTER)
 
     return console_handler
 
 # Define google cloud platform handler
-def get_gcp_handler():
+def get_gcp_handler() -> Callable :
     """
         Get gcp handler for logging in gcp project 'intellifactflap'
     """
@@ -33,7 +34,7 @@ def get_gcp_handler():
     return cloud_handler
 
 # Main function to get logger
-def get_logger(name: str, log_level: str):
+def get_logger(name: str, log_level: str) -> Callable:
     """
         Main functionto get a logger with a specified log level. 
     """
