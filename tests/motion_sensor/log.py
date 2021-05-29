@@ -1,3 +1,4 @@
+import sys
 import logging
 import google.cloud.logging
 from typing import Callable
