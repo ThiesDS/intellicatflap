@@ -28,7 +28,7 @@ def get_gcp_handler() -> Callable :
     """
 
     # Define handler
-    client = google.cloud.logging.Client(project="intellifactflap")
+    client = google.cloud.logging.Client(project="intellicatflap")
     cloud_handler = CloudLoggingHandler(client, name="intellicatflap_log")
     cloud_handler.setFormatter(FORMATTER)
 
