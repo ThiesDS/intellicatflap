@@ -3,7 +3,7 @@ import time
  
 
 # config
-SENSOR_PIN = 4
+SENSOR_PIN = 7
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(SENSOR_PIN, GPIO.IN)
 
@@ -13,11 +13,11 @@ def callback(channel):
 
 # start event/motion detection
 try:
-    GPIO.add_event_detect(SENSOR_PIN , GPIO.RISING, callback=callback)
     while True:
+        GPIO.add_event_detect(SENSOR_PIN , GPIO.RISING, callback=callback)
         time.sleep(5)
 except KeyboardInterrupt:
-    print "Quit testing ..."
+    print("Quit testing ...")
 
 # cleanup GPIO stuff
 GPIO.cleanup()
