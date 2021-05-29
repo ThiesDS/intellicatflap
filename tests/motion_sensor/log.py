@@ -57,7 +57,7 @@ def get_logger(name: str, log_level: str) -> Callable:
 
     # Add handler
     logger.addHandler(get_console_handler())
-    #logger.addHandler(get_google_handler())
+    logger.addHandler(get_google_handler())
 
     return logger
 
