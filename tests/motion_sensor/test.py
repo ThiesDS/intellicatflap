@@ -11,19 +11,29 @@ SENSOR_PIN = 7
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(SENSOR_PIN, GPIO.IN)
 
-# function to execute when movement is detected
-def callback(channel):
-    print('Cat movement detected!')
+# initial setup
+active = 0
+movement = 0
 
 # start event/motion detection
 logger.info('Start test motion detection.')
 try:
     while True:
-        #GPIO.add_event_detect(SENSOR_PIN , GPIO.RISING, callback=callback)
-        logger.info('Test output.')
-        time.sleep(5)
-except KeyboardInterrupt:
-    print("Quit testing ...")
+        # read state
+        movement = GPIO.input(Pin)
+        
+        # if movement detected, set active to 1
+        if movement == 1 and active == 0:
+            logger.info("Movement detected.")
+            active = 1
+ 
+        # if no movement detected anymore, set active to 0
+        elif movement == 0 and active == 1:
+            logger("No movement detected.")
+            active = 0
+        
+        time.sleep(2)
 
-# cleanup GPIO stuff
-#GPIO.cleanup()
+except KeyboardInterrupt:
+    logger.info("Quit testing on KeyboardInterrupt.")
+    GPIO.cleanup()
