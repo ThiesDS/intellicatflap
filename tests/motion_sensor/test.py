@@ -20,7 +20,7 @@ logger.info('Start test motion detection.')
 try:
     while True:
         # read state
-        movement = GPIO.input(Pin)
+        movement = GPIO.input(SENSOR_PIN)
         
         # if movement detected, set active to 1
         if movement == 1 and active == 0:
