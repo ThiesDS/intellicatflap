@@ -1,4 +1,5 @@
 import sys
+from datetime import datetime
 import logging
 import google.cloud.logging
 from typing import Callable
