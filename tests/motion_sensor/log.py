@@ -1,9 +1,10 @@
 import sys
-from datetime import datetime
 import logging
 import google.cloud.logging
 from typing import Callable
+from logging import FileHandler
 from google.cloud.logging.handlers import CloudLoggingHandler
+from datetime import datetime
 
 
 # Logger config
