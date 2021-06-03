@@ -21,7 +21,8 @@ try:
     while True:
         # read state
         movement = GPIO.input(SENSOR_PIN)
-        
+        logger.debug(f'Current sensor state: {movement}')
+
         # if movement detected, set active to 1
         if movement == 1 and active == 0:
             logger.info("Movement detected.")
@@ -32,7 +33,7 @@ try:
             logger("No movement detected.")
             active = 0
         
-        time.sleep(2)
+        time.sleep(10)
 
 except KeyboardInterrupt:
     logger.info("Quit testing on KeyboardInterrupt.")
