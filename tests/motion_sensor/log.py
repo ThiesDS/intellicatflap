@@ -31,7 +31,7 @@ def get_file_handler(log_file_path: str, log_file_name: str) -> Callable:
     
     # Set log file name: timestamp for totday
     today = datetime.today()
-    log_file_name = log_file_name.replace('<YYYYmmddHMS>', today.strftime('%Y%m%d%H%M%S'))
+    log_file_name = log_file_name.replace('<YYYYmmdd>', today.strftime('%Y%m%d'))
 
     # Define handler
     file_handler = FileHandler(log_file_path + log_file_name)
