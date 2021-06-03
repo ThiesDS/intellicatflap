@@ -21,6 +21,21 @@ def get_console_handler() -> Callable:
 
     return console_handler
 
+# Define file handler
+def get_file_handler(log_file_path: str, log_file_name: str) -> Callable:
+    """
+    Create a file_handler for logging
+    """
+    
+    # Set log file name: timestamp for totday
+    today = datetime.today()
+    log_file_name = log_file_name.replace('<YYYYmmddHMS>', today.strftime('%Y%m%d%H%M%S'))
+
+    # Define handler
+    file_handler = FileHandler(log_file_path + log_file_name)
+    file_handler.setFormatter(FORMATTER)
+    return file_handler
+
 # Define google cloud platform handler
 def get_gcp_handler() -> Callable :
     """
@@ -35,7 +50,7 @@ def get_gcp_handler() -> Callable :
     return cloud_handler
 
 # Main function to get logger
-def get_logger(name: str, log_level: str) -> Callable:
+def get_logger(name: str, log_level: str, log_file_path: str, log_file_name: str) -> Callable:
     """
         Main functionto get a logger with a specified log level. 
     """
@@ -57,6 +72,7 @@ def get_logger(name: str, log_level: str) -> Callable:
 
     # Add handler
     logger.addHandler(get_console_handler())
+    logger.addHandler(get_file_handler())
     logger.addHandler(get_gcp_handler())
 
     return logger

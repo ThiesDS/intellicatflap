@@ -4,7 +4,7 @@ import log
 
 
 # Get logger
-logger = log.get_logger(__name__, log_level='DEBUG')
+logger = log.get_logger(__name__, log_level='DEBUG', log_file_path='./', log_file_name='test_<YYYYmmddHMS>.logs')
 
 # config
 SENSOR_PIN = 7
