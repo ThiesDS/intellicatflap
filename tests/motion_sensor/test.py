@@ -7,7 +7,7 @@ import log
 logger = log.get_logger(__name__, log_level='DEBUG', log_file_path='./', log_file_name='test_<YYYYmmdd>.logs')
 
 # config
-SENSOR_PIN = 7
+SENSOR_PIN = 4
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(SENSOR_PIN, GPIO.IN)
 
