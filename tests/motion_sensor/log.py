@@ -72,7 +72,7 @@ def get_logger(name: str, log_level: str, log_file_path: str, log_file_name: str
 
     # Add handler
     logger.addHandler(get_console_handler())
-    logger.addHandler(get_file_handler())
+    logger.addHandler(get_file_handler(log_file_path,log_file_name))
     logger.addHandler(get_gcp_handler())
 
     return logger
