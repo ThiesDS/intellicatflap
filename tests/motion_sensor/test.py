@@ -30,7 +30,7 @@ try:
  
         # if no movement detected anymore, set active to 0
         elif movement == 0 and active == 1:
-            logger("No movement detected.")
+            logger.info("No movement detected.")
             active = 0
         
         time.sleep(10)
